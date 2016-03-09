@@ -14,6 +14,10 @@ module RuboCop
         @testsuite = REXML::Element.new('testsuite', @testsuites).tap do |el|
           el.add_attributes('name' => 'rubocop')
         end
+        REXML::Element.new('testcase', @testsuite).tap do |f|
+          f.attributes['classname'] = 'rubocop'
+          f.attributes['name'] = 'rubocop started'
+        end
       end
 
       def file_finished(file, offences)
